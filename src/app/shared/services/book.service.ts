@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore} from '@angular/fire/firestore';
+import { Observable } from 'rxjs';
 import { Book } from '../models/book.model';
 
 @Injectable({
@@ -11,7 +12,6 @@ export class BookService {
 
   addBook(book: Book){
     const bookRef = this.firestore.collection(`books`);
-    book.created_at= new Date();
 
     return bookRef.add( {
      userId: book.userId,
@@ -21,5 +21,9 @@ export class BookService {
      genres: book.genres,
      created_at: book.created_at
    })
+  }
+
+  getMyBooks(userId){
+    return this.firestore.collection<Book>('books', ref => ref.where('userId', '==', userId)).snapshotChanges();
   }
 }

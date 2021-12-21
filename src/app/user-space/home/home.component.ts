@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { MatDialog, MatDialogRef } from '@angular/material/dialog';
-import { Router } from '@angular/router';
+import { MatDialog } from '@angular/material/dialog';
 import { AddBookComponent } from 'src/app/user-space/add-book/add-book.component';
 import { AuthService } from 'src/app/shared/services/auth.service';
 
@@ -26,8 +25,7 @@ export class HomeComponent implements OnInit {
 
   addBook(){
     this.dialog.open(AddBookComponent, { 
-      //height: '80%',//this.dialogHeight,
-      minWidth: '30%', //this.dialogWidth,
+      minWidth: '30%', 
       data: {userID: this.user.uid}
     });
   }

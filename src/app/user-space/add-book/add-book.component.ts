@@ -1,6 +1,6 @@
 import { Component, Inject, OnInit, ViewChild } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import {COMMA, ENTER} from '@angular/cdk/keycodes';
+import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { MatChipInputEvent, MatChipList } from '@angular/material/chips';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { BookService } from 'src/app/shared/services/book.service';
@@ -8,131 +8,127 @@ import { AlertService } from 'src/app/shared/services/alert.service';
 import { Book } from 'src/app/shared/models/book.model';
 
 export interface Genre {
-  name: string;
+    name: string;
 }
 
 @Component({
-  selector: 'app-add-book',
-  templateUrl: './add-book.component.html',
-  styleUrls: ['./add-book.component.scss']
+    selector: 'app-add-book',
+    templateUrl: './add-book.component.html',
+    styleUrls: ['./add-book.component.scss']
 })
 export class AddBookComponent implements OnInit {
-  @ViewChild('chipList') chipList: MatChipList;
+    @ViewChild('chipList') chipList: MatChipList;
 
-  bookForm: FormGroup;
-  book: Book;
+    bookForm: FormGroup;
+    book: Book;
 
-  minDate;
-  maxDate;
+    minDate;
+    maxDate;
 
-  addOnBlur = true;
-  readonly separatorKeysCodes = [ENTER, COMMA] as const;
+    addOnBlur = true;
+    readonly separatorKeysCodes = [ENTER, COMMA] as const;
 
-  genres = {
-    genres: ['Mystery', 'Sci-Fi']
-  }
-
-  constructor(
-              private fb: FormBuilder,
-              @Inject(MAT_DIALOG_DATA) public data: {userID: any},
-              private bookservice: BookService,
-              public dialogRef: MatDialogRef<any>,
-              private alertService: AlertService
-              ) 
-              { 
-                  const currentYear = new Date().getFullYear();
-                  const currentMonth = new Date().getMonth();
-                  const currentDay = new Date().getDate();
-                  this.minDate = new Date(currentYear - 1000, 0, 1);
-                  this.maxDate = new Date(currentYear, currentMonth, currentDay);
-
-                  this.bookForm=this.fb.group({
-                    title: ['', [Validators.required]],
-                    author: ['', [Validators.required]],
-                    public_date:  [null, [Validators.required]],
-                    tags: this.fb.array(this.genres.genres, this.validateArrayNotEmpty)
-                  })
-  }
-
-  ngOnInit(): void {
-
-    this.bookForm.get('tags').statusChanges.subscribe(
-      status => this.chipList.errorState = status === 'INVALID'
-    );
-  }
-
-  initGenre(genre: string): FormControl {
-    return this.fb.control(genre);
-  }
-
-  validateArrayNotEmpty(c: FormControl) {
-    if (c.value && c.value.length === 0) {
-      return {
-        validateArrayNotEmpty: { valid: false }
-      };
-    }
-    return null;
-  }
-
-  add(event: MatChipInputEvent, form: FormGroup): void {
-    const input = event.input;
-    const value = event.value;
-
-    // Add genre
-    if ((value || '').trim()) {
-      const control = <FormArray>form.get('tags');
-      control.push(this.initGenre(value.trim()));
-      console.log(control);
+    genres = {
+        genres: ['Mystery', 'Sci-Fi']
     }
 
-    // Reset the input value
-    if (input) {
-      input.value = '';
+    constructor(
+        private fb: FormBuilder,
+        @Inject(MAT_DIALOG_DATA) public data: { userID: any },
+        private bookservice: BookService,
+        public dialogRef: MatDialogRef<any>,
+        private alertService: AlertService
+    ) {
+        const currentYear = new Date().getFullYear();
+        const currentMonth = new Date().getMonth();
+        const currentDay = new Date().getDate();
+        this.minDate = new Date(currentYear - 1000, 0, 1);
+        this.maxDate = new Date(currentYear, currentMonth, currentDay);
+
+        this.bookForm = this.fb.group({
+            title: ['', [Validators.required]],
+            author: ['', [Validators.required]],
+            public_date: [null, [Validators.required]],
+            tags: this.fb.array(this.genres.genres, this.validateArrayNotEmpty)
+        })
     }
-  }
 
-  remove(form, index) {
-    console.log(form);
-    form.get('tags').removeAt(index);
-  }
+    ngOnInit(): void {
 
-  onSubmit(){
+        this.bookForm.get('tags').statusChanges.subscribe(
+            status => this.chipList.errorState = status === 'INVALID'
+        );
+    }
 
-    this.book= new Book(
-      this.data.userID, 
-      this.title.value, 
-      this.author.value, 
-      this.publicDate.value, 
-      this.tags.value
-    );
+    initGenre(genre: string): FormControl {
+        return this.fb.control(genre);
+    }
 
-    this.bookservice.addBook(this.book).then(res => {
-      this.dialogRef.close();
-      this.alertService.topEndNotif('success', 'Book added successfully.');
-  })
-  .catch(e => {
-      console.log(e);
-      this.alertService.alertMessage('error',e.code, e.message);
-  });
-    
+    validateArrayNotEmpty(c: FormControl) {
+        if (c.value && c.value.length === 0) {
+            return {
+                validateArrayNotEmpty: { valid: false }
+            };
+        }
+        return null;
+    }
 
-  }
+    add(event: MatChipInputEvent, form: FormGroup): void {
+        const input = event.input;
+        const value = event.value;
 
-  get title(){
-    return this.bookForm.get('title');
-  }
+        // Add genre
+        if ((value || '').trim()) {
+            const control = <FormArray>form.get('tags');
+            control.push(this.initGenre(value.trim()));
+        }
 
-  get author(){
-    return this.bookForm.get('author');
-  }
+        // Reset the input value
+        if (input) {
+            input.value = '';
+        }
+    }
 
-  get publicDate(){
-    return this.bookForm.get('public_date');
-  }
+    remove(form, index) {
+        form.get('tags').removeAt(index);
+    }
 
-  get tags(){
-    return this.bookForm.get('tags');
-  }
+    onSubmit() {
 
+        this.book = new Book(
+            this.data.userID,
+            this.title.value,
+            this.author.value,
+            this.publicDate.value,
+            this.tags.value
+        );
+
+        this.bookservice.addBook(this.book).then(() => {
+            this.dialogRef.close();
+            this.alertService.topEndNotif('success', 'Book added successfully.');
+        })
+            .catch(e => {
+                console.error(e);
+                this.alertService.alertMessage('error', e.code, e.message);
+            });
+
+
+    }
+
+    get title() {
+        return this.bookForm.get('title');
+    }
+
+    get author() {
+        return this.bookForm.get('author');
+    }
+
+    get publicDate() {
+        return this.bookForm.get('public_date');
+    }
+
+    get tags() {
+        return this.bookForm.get('tags');
+    }
 
 }

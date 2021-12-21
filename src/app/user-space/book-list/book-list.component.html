@@ -1,0 +1,53 @@
+<div class="margin">
+    <div class="mat-display-3 primary-color">My Bookshelf</div>
+
+
+    <table *ngIf="dataLoaded" mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+  
+        <!-- Position Column -->
+        <ng-container matColumnDef="position">
+          <th mat-header-cell *matHeaderCellDef> No. </th>
+          <td mat-cell *matCellDef="let element; let i = index">{{i+1}} </td>
+        </ng-container>
+      
+        <!-- Title Column -->
+        <ng-container matColumnDef="title">
+          <th mat-header-cell *matHeaderCellDef> Title </th>
+          <td mat-cell *matCellDef="let element"> {{element.title}} </td>
+        </ng-container>
+      
+        <!-- Author Column -->
+        <ng-container matColumnDef="author">
+          <th mat-header-cell *matHeaderCellDef> Author </th>
+          <td mat-cell *matCellDef="let element"> {{element.author}} </td>
+        </ng-container>
+      
+        <!-- Publication Date Column -->
+        <ng-container matColumnDef="publication date">
+          <th mat-header-cell *matHeaderCellDef> Publication Date </th>
+          <td mat-cell *matCellDef="let element"> {{element.publication_date.toDate() | date}} </td>
+        </ng-container>
+
+        <!-- Genres Column -->
+        <ng-container matColumnDef="genres">
+            <th mat-header-cell *matHeaderCellDef> Genres </th>
+            <td  mat-cell *matCellDef="let element">
+              <div fxLayout="row wrap" fxLayoutAlign="center" fxLayoutGap="5px grid">
+
+              <mat-chip-list *ngFor="let genre of element.genres; let i =index">
+                <mat-chip selected [color]="color(i)">{{genre}}</mat-chip>
+              </mat-chip-list>
+            </div>
+            </td>
+          </ng-container>
+      
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+
+      <mat-paginator [pageSizeOptions]="[5, 10, 20]"
+      showFirstLastButtons 
+      class="mat-elevation-z8">
+</mat-paginator>
+
+</div>

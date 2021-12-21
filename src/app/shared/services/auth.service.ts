@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from "@angular/fire/auth";
-import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
 import { Router } from "@angular/router";
 import { BehaviorSubject } from 'rxjs';
 import { AlertService } from './alert.service';
@@ -15,8 +14,7 @@ export class AuthService {
   private _isLoggedIn$ = new BehaviorSubject<boolean>(false);
   isLoggedIn$ = this._isLoggedIn$.asObservable();
 
-  constructor( 
-    private firestore: AngularFirestore,   
+  constructor(    
     private fireauth: AngularFireAuth, 
     private alertService: AlertService,
     private router: Router
@@ -35,20 +33,6 @@ export class AuthService {
           displayName: username
         });
 
-        const userRef: AngularFirestoreDocument<any> = this.firestore.doc(`users/${result.user.uid}`);
-
-         userRef.set( {
-          uid: result.user.uid,
-          email: email,
-          username: username
-        }, 
-        {
-          merge: true
-        })
-
-        
-
-        //this.SignIn(email, password);
         this.router.navigate(['/user/home']);
 
       }).catch((error) => {
@@ -59,7 +43,7 @@ export class AuthService {
 
   SignIn(email, password) {
     return this.fireauth.signInWithEmailAndPassword(email, password)
-      .then((result) => {
+      .then((res) => {
         
           this.router.navigate(['/user/home']);
 
@@ -90,8 +74,6 @@ export class AuthService {
   getCurrentUser(){
     return this.currentUser;
   }
-
-
 
   isLoggedIn() {
     return this.isLoggedIn$;

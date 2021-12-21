@@ -1,0 +1,18 @@
+table, .mat-paginator {
+    width: 90%;
+  }
+
+.mat-column-title, .mat-column-author, .mat-column-publication-date{
+  width: 20%;
+}
+
+.mat-column-title, .mat-column-author, .mat-column-publication-date, .mat-column-genres{
+
+  text-align: center;
+
+}
+
+.my-mat-row, .mat-column-genres {
+  align-items: stretch;
+  height: 100% !important;
+}

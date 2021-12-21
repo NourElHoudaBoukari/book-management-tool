@@ -6,6 +6,6 @@ constructor(
     public author : string,
     public publicDate : Date,
     public genres : string[]
-){}
+){ this.created_at=new Date() }
 
 }

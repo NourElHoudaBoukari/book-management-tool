@@ -10,6 +10,9 @@ import {MatDialogModule} from '@angular/material/dialog';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import {MatChipsModule} from '@angular/material/chips';
+import {MatTableModule} from '@angular/material/table';
+import { MatPaginatorModule } from '@angular/material/paginator';
+
 
 const importedModules=[
 
@@ -22,7 +25,9 @@ const importedModules=[
   MatDialogModule,
   MatDatepickerModule,
   MatNativeDateModule,
-  MatChipsModule
+  MatChipsModule,
+  MatTableModule,
+  MatPaginatorModule
 ]
 
 
