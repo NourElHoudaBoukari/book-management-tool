@@ -15,7 +15,17 @@ export class AlertService {
       title: title,
       text: text,
       icon: icon,
-    })
+    });
+  }
 
+  topEndNotif(icon, title){
+    Swal.fire({
+      position: 'top-end',
+      title: title,
+      icon: icon,
+      showConfirmButton: false,
+      timer: 2000
+    }
+    )
   }
 }

@@ -1,0 +1,13 @@
+<mat-toolbar color="primary" fxLayoutAlign="space-between">
+    <span fxLayoutAlign="center center" fxLayoutGap="15px">
+      <mat-icon class="book-icon">menu_book</mat-icon>
+      <div fxShow.lt-sm="false" class="title-2">Book Management Tool</div>
+    </span>
+    <div fxLayoutAlign="center center">
+    <a mat-button (click)="logout()">
+   
+        <span class="sign-out">Sign out</span>
+        <mat-icon>exit_to_app</mat-icon>
+      </a>
+    </div>
+  </mat-toolbar>

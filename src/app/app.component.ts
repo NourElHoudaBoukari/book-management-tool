@@ -12,16 +12,11 @@ export class AppComponent {
 
   constructor(
     private authservice: AuthService
-  ){}
-
-  ngOnInit(): void {
-
-    this.authservice.isLoggedIn().subscribe((res)=>{this.loggedin=res});
-      
+  ){ 
+    this.authservice.isLoggedIn().subscribe((res)=>{
+      this.loggedin=res;
+    }); 
   }
 
-  logout(){
-    this.authservice.signOut();
-  }
 
 }

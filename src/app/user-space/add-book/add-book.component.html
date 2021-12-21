@@ -1,0 +1,58 @@
+<div class="primary-color dialog-title" fxLayoutAlign="center center">Add a new Book To your Shelf</div>
+<mat-dialog-content>
+    <form [formGroup]="bookForm"  (ngSubmit)="onSubmit()" fxLayout="column" fxLayoutGap="15px">
+
+        <mat-form-field>
+            <mat-label>Title</mat-label>
+            <input matInput   placeholder="Enter the book's title..." formControlName="title">
+
+            <mat-error *ngIf="title.invalid && title.touched">
+              <div *ngIf="title.errors?.required">
+                The title is required.
+              </div>
+            </mat-error>
+
+          </mat-form-field>
+
+          <mat-form-field>
+            <mat-label>Author</mat-label>
+            <input matInput placeholder="Enter the author's name of the book..." formControlName="author">
+
+            <mat-error *ngIf="author.invalid && author.touched">
+              <div *ngIf="author.errors?.required">
+                The author name is required.
+              </div>
+            </mat-error>
+
+          </mat-form-field>
+
+          <mat-form-field>
+            <mat-label >Publication Date</mat-label>
+            <input matInput [matDatepicker]="dp" formControlName="public_date" [min]="minDate" [max]="maxDate">
+            <mat-datepicker-toggle matSuffix [for]="dp"></mat-datepicker-toggle>
+            <mat-datepicker #dp></mat-datepicker>
+            <mat-error *ngIf="publicDate.invalid && publicDate.touched">Please add the book's publication date.</mat-error>
+          </mat-form-field>
+
+          <mat-form-field>
+            <mat-label>Genres</mat-label>
+            <mat-chip-list #chipList formArrayName="tags">
+              <mat-chip fxLayoutAlign="center center"  *ngFor="let genre of bookForm.get('tags')['controls']; let i=index;" (removed)="remove(bookForm, i)">
+                {{genre.value}}
+                <button matChipRemove class="cancel-button">
+                  <mat-icon class="cancel-icon" inline="true">cancel</mat-icon>
+                </button>
+              </mat-chip>
+              <input placeholder="Add a new genre..."
+                     [matChipInputFor]="chipList"
+                     [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                     [matChipInputAddOnBlur]="addOnBlur"
+                     (matChipInputTokenEnd)="add($event, bookForm)"
+                     >
+            </mat-chip-list>
+            <mat-error>Please select at least one genre.</mat-error>
+          </mat-form-field>
+
+          <button mat-flat-button color="primary">Add Book</button>
+        </form>
+</mat-dialog-content>

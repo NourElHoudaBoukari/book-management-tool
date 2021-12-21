@@ -5,3 +5,65 @@ body {  margin: 0;
         font-family: Roboto, "Helvetica Neue", sans-serif;
         background-color: #f2ebff;
      }
+
+.container{
+        
+        height: 100vh;
+        background-image: url(/assets/images/background.jpg);
+        background-size: 100% 100%;
+        }   
+        
+.book-icon{
+        font-size: 20px;
+}
+
+.title-1{
+        font-family: Forta; 
+        font-size: 18px; 
+}
+
+.title-2{
+        font-family: Forta; 
+        font-size: 20px;
+}
+
+.large-button{
+
+        height: 50px;
+        width: 200px;
+    
+    }
+
+.medium-font{
+        font-size: medium;
+}
+
+.card-1{
+        width: 300px; 
+        padding-top: 25px;
+}
+
+.gold-gradient-title {
+        background-image: linear-gradient(
+          //to right,
+          0deg,
+          #744f3d 0,
+                 #ac735b 22%, 
+          #cf725a 45%,
+          #eabb91 50%,
+          #f27c5e 55%,
+          #d69376 78%,
+          #7a5948 100%
+          );
+           color: transparent;
+           -webkit-background-clip: text;
+           background-clip: text;
+           font-family: Forta;
+          font-size: x-large;
+      }
+    
+
+::-webkit-scrollbar {
+        display: none;
+     }
+     

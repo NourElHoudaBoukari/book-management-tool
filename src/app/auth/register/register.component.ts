@@ -29,7 +29,7 @@ export class RegisterComponent implements OnInit {
 
   onSubmit(){
 
-    this.authService.SignUp(this.username.value, this.email.value, this.password.value)
+    this.authService.SignUp(this.username.value, this.email.value, this.password.value);
 
   }
 

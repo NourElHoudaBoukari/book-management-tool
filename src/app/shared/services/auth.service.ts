@@ -53,7 +53,7 @@ export class AuthService {
 
       }).catch((error) => {
        console.log(error.message);
-       this.alertService.alertMessage('error', 'ERROR', error.message);
+       this.alertService.alertMessage('error', error.code, error.message);
       })
   }
 
@@ -64,7 +64,7 @@ export class AuthService {
           this.router.navigate(['/user/home']);
 
       }).catch((error) => {
-        this.alertService.alertMessage('error', 'ERROR', error.message);
+        this.alertService.alertMessage('error', error.code, error.message);
       })
   }
 

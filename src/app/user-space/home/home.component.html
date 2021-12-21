@@ -1,3 +1,7 @@
 <div *ngIf="user.displayName" class="banner">
     <div class="mat-display-4">Welcome to Your Library, {{user.displayName}}!</div>
+    <button mat-raised-button color="accent" class="large-button">
+        <mat-icon>add</mat-icon>
+        <span class="medium-font" (click)="addBook()">Add a New Book</span>
+    </button>
 </div>

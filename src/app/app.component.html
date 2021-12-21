@@ -1,16 +1,4 @@
-<mat-toolbar color="primary" fxLayoutAlign="space-between">
-  <span fxLayoutAlign="center center" fxLayoutGap="15px">
-    <mat-icon>menu_book</mat-icon>
-    <h3 fxShow.lt-sm="false">Book Management Tool</h3>
-  </span>
-  <div *ngIf="loggedin" fxLayoutAlign="center center">
-  <a mat-button (click)="logout()">
- 
-      <span style="font-size: 18px; padding-right: 5px;" >Sign out</span>
-      <mat-icon>exit_to_app</mat-icon>
-    </a>
-  </div>
-</mat-toolbar>
+<app-nav-bar *ngIf="loggedin"></app-nav-bar>
 <main>
 <router-outlet></router-outlet>
 </main>
