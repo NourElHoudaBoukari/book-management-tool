@@ -5,6 +5,7 @@ import { MatChipInputEvent, MatChipList } from '@angular/material/chips';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { BookService } from 'src/app/shared/services/book.service';
 import { AlertService } from 'src/app/shared/services/alert.service';
+import { Book } from 'src/app/shared/models/book.model';
 
 export interface Genre {
   name: string;
@@ -19,6 +20,8 @@ export class AddBookComponent implements OnInit {
   @ViewChild('chipList') chipList: MatChipList;
 
   bookForm: FormGroup;
+  book: Book;
+
   minDate;
   maxDate;
 
@@ -95,7 +98,15 @@ export class AddBookComponent implements OnInit {
 
   onSubmit(){
 
-    this.bookservice.addBook(this.data.userID, this.title.value, this.author.value, this.publicDate.value, this.tags.value).then(res => {
+    this.book= new Book(
+      this.data.userID, 
+      this.title.value, 
+      this.author.value, 
+      this.publicDate.value, 
+      this.tags.value
+    );
+
+    this.bookservice.addBook(this.book).then(res => {
       this.dialogRef.close();
       this.alertService.topEndNotif('success', 'Book added successfully.');
   })

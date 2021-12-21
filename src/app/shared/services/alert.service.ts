@@ -23,6 +23,7 @@ export class AlertService {
       position: 'top-end',
       title: title,
       icon: icon,
+      width: '400px',
       showConfirmButton: false,
       timer: 2000
     }
