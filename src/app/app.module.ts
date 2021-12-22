@@ -13,13 +13,12 @@ import { AngularFireModule } from "@angular/fire";
 import { AngularFireAuthModule } from "@angular/fire/auth";
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { environment } from '../environments/environment';
-import { NavBarComponent } from './shared/ui/nav-bar/nav-bar.component';
+import { UiModule } from './shared/ui/ui.module';
 
 
 @NgModule({
   declarations: [
-    AppComponent,
-    NavBarComponent
+    AppComponent
   ],
   imports: [
     BrowserModule,
@@ -31,6 +30,7 @@ import { NavBarComponent } from './shared/ui/nav-bar/nav-bar.component';
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireAuthModule,
     AngularFirestoreModule,
+    UiModule
   ],
   providers: [],
   bootstrap: [AppComponent]

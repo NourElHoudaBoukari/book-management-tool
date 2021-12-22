@@ -43,7 +43,7 @@ export class AuthService {
 
   SignIn(email, password) {
     return this.fireauth.signInWithEmailAndPassword(email, password)
-      .then((res) => {
+      .then(() => {
         
           this.router.navigate(['/user/home']);
 

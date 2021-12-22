@@ -1,5 +1,5 @@
 table, .mat-paginator {
-    width: 90%;
+    width: 100%;
   }
 
 .mat-column-title, .mat-column-author, .mat-column-publication-date{
@@ -7,12 +7,33 @@ table, .mat-paginator {
 }
 
 .mat-column-title, .mat-column-author, .mat-column-publication-date, .mat-column-genres{
-
   text-align: center;
+}
+
+.mat-display-2{
+    color: #916b46;
+}
+
+@media screen and (max-width: 1200px){
+
+
+    .mat-table {
+        display: block;
+        width: 100%;
+        overflow-x: auto;
+      }
+
+      .table-container{
+        width: 90vw !important; 
+      }
+
+      .table-column{
+        min-width: 200px !important;
+      }
+
+      .mat-paginator{
+          width: 100%;
+      }
 
 }
 
-.my-mat-row, .mat-column-genres {
-  align-items: stretch;
-  height: 100% !important;
-}

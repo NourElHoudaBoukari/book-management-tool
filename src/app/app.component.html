@@ -1,4 +1,9 @@
-<app-nav-bar *ngIf="loggedin"></app-nav-bar>
+
+<div class="app-container" fxLayout="column" fxLayoutAlign="space-between center">
+
 <main>
+<app-nav-bar *ngIf="loggedin"></app-nav-bar>
 <router-outlet></router-outlet>
 </main>
+<app-footer *ngIf="loggedin"></app-footer>
+</div>

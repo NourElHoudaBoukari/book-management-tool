@@ -19,7 +19,8 @@ const routes: Routes = [
     ...canActivate(redirectUnauthorizedToLogin)
   },
 
-  { path: '', redirectTo: 'login', pathMatch: 'full' }
+  { path: '', redirectTo: 'login', pathMatch: 'full' },
+  { path: '**', redirectTo: 'login' }
 ];
 
 @NgModule({

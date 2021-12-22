@@ -47,8 +47,21 @@ $md-mcgpalette0: (
     color: mat-color($primary) !important;
   }
 
+  .accent-color {
+    color: mat-color($accent) !important;
+  }
 
   @font-face {
     font-family: "Forta";
     src: url(assets/fonts/FORTA-1-0.woff);
+  }
+
+  @font-face {
+    font-family: "Nexa";
+    src: url(assets/fonts/NexaDemo-Light.woff);
+  }
+
+  @font-face {
+    font-family: "Nexa-bold";
+    src: url(assets/fonts/NexaDemo-Bold.woff);
   }

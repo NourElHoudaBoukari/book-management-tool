@@ -7,6 +7,8 @@ import Swal from 'sweetalert2';
 })
 export class AlertService {
 
+  confirmButtonColor='#160945';
+
   constructor() { }
 
   alertMessage(icon, title, text){
@@ -15,6 +17,7 @@ export class AlertService {
       title: title,
       text: text,
       icon: icon,
+      confirmButtonColor: this.confirmButtonColor
     });
   }
 
